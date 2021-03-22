@@ -67,3 +67,22 @@ Learning how to search for relevant information is one of the most important ski
 ## Go get em tiger
 
 On to [module 1](./mod1/README.md)!
+
+## FAQ
+
+- Y tho
+  - I had a bad time in 357. You shouldn't.
+
+- There are errors and dumb typos. This is crap.
+  - Excellent not a question! Submit a pull request and we can get it fixed... or at least better.
+
+## Contribute
+
+Pull requests welcome!
+
+- I'd love to get more references and links to other resources throughout.
+- pls fix my mistakes
+
+### Contributors
+
+- Spencer Shaw
