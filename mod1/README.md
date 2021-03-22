@@ -18,11 +18,35 @@ Since CPE 357 is all about Unix, you should do all of your work on a Unix-like o
 
 ### Terminal
 
-The terminal is text based interface is used to interact with a computer. A program called a "shell" is used to make this easier. When using a terminal, it is generally assumed that someone is using a shell program such as `bash`(Very common), `ash`(let's pretend the A is for ancient), `zsh`(often the MacOS default), etc.. If I want to access another computer, such as a Unix server on campus, I can use a program called `ssh` to open a remote terminal/shell on that machine
+The terminal is text based interface is used to interact with a computer. A program called a "shell" is used to make this easier. When using a terminal, it is generally assumed that someone is using a shell program such as `bash`(Very common), `ash`(let's pretend the A is for ancient), `zsh`(often the MacOS default), etc.. If I want to access another computer, such as a Unix server on campus, I can use a program called `ssh` to open a remote terminal/shell on that machine.
+
+MIT offers [a resource](https://missing.csail.mit.edu/) for learning all about this, courtesy of Rick.
 
 ### IDE
 
-You've probably been using PyCharm and IntelliJ as your integrated development environment (IDE) for 202 and 203. Your professor might encourage you to use Vim, a terminal based
+You've probably been using PyCharm and IntelliJ as your integrated development environment (IDE) for 202 and 203. Your professor might encourage you to use Vim, a terminal based editor, for 357.
+
+#### Vim
+
+Vim is entirely useful to learn. At the bear minimum you should learn how to:
+
+1. Open a file with Vim
+2. Edit a file in Vim
+3. Save and exit Vim
+
+To open a file in Vim:
+
+    $ vim my_file.c
+
+Vim will open in "a mode that is not insert mode", meaning we can move around a bit but it is really expecting "commands" in its prompt. Pressing "i" will put it into "insert-mode" so we can actually move around with the arrow keys and type to insert characters. To get out of insert-mode, hit the escape key. Now you should be back in "probably command mode". To __quit Vim__, type a colon followed by q for quit. Vim might warn you that you will lose your changes. To save your files, use the ":w" command. Save and quit can be chained together as ":wq". If you don't want to save your changes, you can add an exclaimation mark to q to force it, ":q!" I hope you can tell that I don't use Vim often. Knowing how to escape Vim is really just a foundational skill. This has been a terrible explanation of Vim; you should now go look up some Vim tutorials.
+
+If you otherwise prefer a GUI IDE (because you weren't born in the 80's), these specific tasks are mostly just useful in a pinch. I love using VSCode but I can still use Vim to edit files inside a terminal. Vim can be configured in all kinds of ways with lots of settings and plugins.
+
+#### Microsoft's Visual Studio Code
+
+It's what's hot right now. Its not clunky like Visual Studio or IntelliJ. It is an electron based application, so it is literally another instance of Chrome running (Electron simultaneous exemplifies everything wrong with web technologies and peak performance of web technologies). It's portability is great. VSCode has plugins for everything under the sun. [Microsofts's C/C++ extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) is super good enough. In addition to that, you will need the [Remote - WSL extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl) in order to develope in Linux while on Windows (If you are afflicted by such malware).
+
+I would recommend setting VSCode to autosave files very quickly, such as after 500 ms or on loss/change of focus.
 
 ### Git
 
@@ -45,11 +69,98 @@ I keep all of my repositories in the git directory, this one is a directory call
 
 ## Make and Makefiles
 
+Make is an awesome tool for scripting. It is basically the solution to repeatedly pressing the up arrow to find a command you need to run again. Just put a shell command under a "recipe" inside your `Makefile`. (Note that the following examples use spaces instead of tabs. I'm doing this for this document. Usually Make will shit itself if you give it spaces. Theres probably a workaround out there.)
+
+    faster:
+        omg --this shell_command.is | so -long
+
+Then you can run it like this:
+
+    $ make faster
+
+Or if you're lazy and bad at typing like me:
+
+    .PHONY: faster
+    f: faster
+    faster:
+        omg --this shell_command.is | so -long
+
+I have `m` aliased to `make` in my shell (search for "bash aliases"), I just run:
+
+    $ m f
+
+Save your arrow keys for... actually they aren't that useful.
+
+The `.PHONY: faster` tells make that the target, `faster` is not a file that it should look for. This gets us to the actual magic of Make:
+
+Make expects recipe targets to be files and if it sees that a file is already "up-to-date", it does not run the recipe. Let's 'make' use of this. >:) I now present, a useful Makefile.
+
+    OBJS=main.o other_stuff.o 
+    
+    main: $(OBJS)
+        gcc $^ -o $@
+
+    %.o: %.c
+        gcc -c $< -o $@
+
+You: "woah woah woah wtf is all this. I don't want to learn another programming language."
+
+Everything here is simple enough that I can explain it whithout full understanding it. Lets go one piece at a time:
+
+- First a variable assignment:
+  - `OBJS`
+   - a variable name
+  - `=`
+   - an assignment (There are a bunch of types of assignment and Make is weird)
+  - `main.o other_stuff.o`
+   - the names of the two object files that will be intermediate file that we build. More on these in the compilers section.
+- Next a recipe:
+  - `main`
+   - The target of the recipe, the name of our desired executable
+  - `: $(OBJS)`
+   - Everything after the ":" on the first line of a recipe is a "dependancy", generally the list of files that the target depends on.
+    - `$( )`
+     - Access a variable
+     - `OBJS`
+      - The name of the variable we defined earlier
+  - `gcc`
+   - Everything after the first line of a recipe is a just shell command. You can even tell Make that you want to use the Python shell. `gcc` is our compiler and linker.
+  - `$^`
+   - Using a variable built into the recipe, this one meaning "all of the dependnacies"
+  - `-o`
+   - Where and what should gcc output.
+  - `$@`
+   - Another variable built into recipes, this one meaning "the target"
+- And finally another recipe
+  - `%.o`
+   - The recipe target, pattern matching anything that ends in ".o"
+  - `: %.c`
+   - The dependancy for the recipe, picking the matching ".c" file
+  - `gcc`
+   - Invoking the compiler
+  - `-c`
+   - The flag telling GCC: "Only compile and assemble these inputs into objects, not executables" (see `gcc --help`)
+  - `$<`
+   - Built in variable meaning "the first depenancy"
+  - -o $@
+
 ## Compilers
 
 ## Excutables
 
 File extensions, such as `file.whatever`, `meme.png`, or `malware.exe`, are kind of made up bullshit (Thanks Bill). "Real" files tell you what they are by a header, the first few bytes of data inside the file. In the case of the executable files we build for 357, the file type is what is known as ELF (Executable and Linkable Format). The file extension is unecessary. Sometimes you will see a .elf file in contexts where more fancy linking is happening such as for an embedded target.
+
+## handin
+
+handin is a stupid simple program that runs on the unix servers. It is probably how you will submit files for class. I hate it very much and don't want to talk about it. I'm pretty sure I've already written multiple rants about it. Professors should have students submit code through Git instead. nuff said.
+
+- handin is written and used in the unix utility style
+- You can't take anything back once it is submitted
+  1. You submit a file to the professor/grader
+  2. You delete that file in your directory
+  3. That file still exists in the professor/grader's directory
+  4. That file could prevent your final submission from building or running correctly (Boom you have a zero for that assignemnt).
+  5. You would have to ask the professor/grader to delete the file on their end.
 
 ## Conclusion
 
