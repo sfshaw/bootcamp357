@@ -77,6 +77,7 @@ Make is an awesome tool for scripting. It is basically the solution to repeatedl
 Then you can run it like this:
 
     $ make faster
+    omg --this shell_command.is | so -long
 
 Or if you're lazy and bad at typing like me:
 
@@ -88,6 +89,7 @@ Or if you're lazy and bad at typing like me:
 I have `m` aliased to `make` in my shell (search for "bash aliases"), I just run:
 
     $ m f
+    omg --this shell_command.is | so -long
 
 Save your arrow keys for... actually they aren't that useful.
 
@@ -109,42 +111,65 @@ Everything here is simple enough that I can explain it whithout full understandi
 
 - First a variable assignment:
   - `OBJS`
-   - a variable name
+    - a variable name
   - `=`
-   - an assignment (There are a bunch of types of assignment and Make is weird)
+    - an assignment (There are a bunch of types of assignment and Make is weird)
   - `main.o other_stuff.o`
-   - the names of the two object files that will be intermediate file that we build. More on these in the compilers section.
+    - the names of the two object files that will be intermediate file that we build. More on these in the compilers section.
 - Next a recipe:
   - `main`
-   - The target of the recipe, the name of our desired executable
+    - The target of the recipe, the name of our desired executable
   - `: $(OBJS)`
-   - Everything after the ":" on the first line of a recipe is a "dependancy", generally the list of files that the target depends on.
-    - `$( )`
-     - Access a variable
-     - `OBJS`
-      - The name of the variable we defined earlier
+    - Everything after the ":" on the first line of a recipe is a "dependancy", generally the list of files that the target depends on.
+      - `$( )`
+        - Access a variable
+      - `OBJS`
+        - The name of the variable we defined earlier
   - `gcc`
-   - Everything after the first line of a recipe is a just shell command. You can even tell Make that you want to use the Python shell. `gcc` is our compiler and linker.
+    - Everything after the first line of a recipe is a just shell command. You can even tell Make that you want to use the Python shell. `gcc` is our compiler and linker.
   - `$^`
-   - Using a variable built into the recipe, this one meaning "all of the dependnacies"
+    - Using a variable built into the recipe, this one meaning "all of the dependnacies"
   - `-o`
-   - Where and what should gcc output.
+    - Where and what should gcc output.
   - `$@`
-   - Another variable built into recipes, this one meaning "the target"
+    - Another variable built into recipes, this one meaning "the target"
 - And finally another recipe
   - `%.o`
-   - The recipe target, pattern matching anything that ends in ".o"
+    - The recipe target, pattern matching anything that ends in ".o"
   - `: %.c`
-   - The dependancy for the recipe, picking the matching ".c" file
+    - The dependancy for the recipe, picking the matching ".c" file
   - `gcc`
-   - Invoking the compiler
+    - Invoking the compiler
   - `-c`
-   - The flag telling GCC: "Only compile and assemble these inputs into objects, not executables" (see `gcc --help`)
+    - The flag telling GCC: "Only compile and assemble these inputs into objects, not executables" (see `gcc --help`)
   - `$<`
-   - Built in variable meaning "the first depenancy"
-  - -o $@
+    - Built in variable meaning "the first depenancy"
+  - `-o`
+    - Flag telling the compiler to output the following output
+  - `$@`
+    - Builtin variable referencing the target of the recipe
+
+So what actually gets run? If we just run `make` without specificying a recipe to target, the first one in the Makefile will be run. In this case, the default recipe is `main`. But that recipe depends on two other files, `main.o` and `other_stuff.o`, which can both be made with the other recipe. Make will do it all for us:
+
+    $ make
+    gcc -c main.c -o main.o
+    gcc -c other_stuff.c -o other_stuff.o
+    gcc main.o other_stuff.o -o main
+
+Why we wanted to do this will hopefully become more evident in the next section on the compiler itself. Suffice it to say, Make gives us a bunch more programability surrounding the compiler.
 
 ## Compilers
+
+The last section of Makefiles talked actually working with the compiler. This section will expand on that and be a bit more general. let the hand waving commence:
+
+Compilers take in source code and output executables. Boom, we're done here. jk. Our weapons of choice are the GNU Compoiler Collection (GCC) and CLang (A C frontend for the LLVM compiler framework). They both break the problem of translating source code to an executable into much smaller pieces of work. Roughly:
+
+1. Translate the code into something that is easier for the compiler to work with (maybe an "AST" or intermediate representation)
+2. Do some transforms and optimizations of the code to make it less shitty. (I want to talk about compiler and optimization flags at least two more times)
+3. Assemble the "stuff" into assembly "machine" code
+4. Link all the pieces of machine code into an executable
+
+__WORK IN PROGRESS__
 
 ## Excutables
 
