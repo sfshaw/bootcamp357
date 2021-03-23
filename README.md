@@ -15,7 +15,7 @@ My goal is to dump everything I still use, practice, and remember a few years af
 
 ## Modules
 
-1. \[In Progress] [Environment Setup](./mod1/README.md)
+1. [Environment Setup](./mod1/README.md)
 2. \[In Progress] [Hello, World!](./mod2/README.md)
 3. \[TODO] [357 should be a history GE (The preprocessor and strings)](./mod3/README.md)
 4. \[TODO] [The Memory Model](./mod4/README.md)
