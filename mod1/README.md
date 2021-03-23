@@ -37,6 +37,7 @@ Vim is entirely useful to learn. At the bear minimum you should learn how to:
 To open a file in Vim:
 
     $ vim my_file.c
+    ...
 
 Vim will open in "a mode that is not insert mode", meaning we can move around a bit but it is really expecting "commands" in its prompt. Pressing "i" will put it into "insert-mode" so we can actually move around with the arrow keys and type to insert characters. To get out of insert-mode, hit the escape key. Now you should be back in "probably command mode". To __quit Vim__, type a colon followed by q for quit. Vim might warn you that you will lose your changes. To save your files, use the ":w" command. Save and quit can be chained together as ":wq". If you don't want to save your changes, you can add an exclaimation mark to q to force it, ":q!" I hope you can tell that I don't use Vim often. Knowing how to escape Vim is really just a foundational skill. This has been a terrible explanation of Vim; you should now go look up some Vim tutorials.
 
@@ -106,48 +107,31 @@ Make expects recipe targets to be files and if it sees that a file is already "u
         gcc -c $< -o $@
 
 You: "woah woah woah wtf is all this. I don't want to learn another programming language."
+Just be glad I'm not teaching you CMake. \*gags\* Everything here is simple enough that I can explain it whithout full understanding it. Lets go one piece at a time:
 
-Everything here is simple enough that I can explain it whithout full understanding it. Lets go one piece at a time:
-
-- First a variable assignment:
-  - `OBJS`
-    - a variable name
-  - `=`
-    - an assignment (There are a bunch of types of assignment and Make is weird)
-  - `main.o other_stuff.o`
-    - the names of the two object files that will be intermediate file that we build. More on these in the compilers section.
-- Next a recipe:
-  - `main`
-    - The target of the recipe, the name of our desired executable
-  - `: $(OBJS)`
-    - Everything after the ":" on the first line of a recipe is a "dependancy", generally the list of files that the target depends on.
-      - `$( )`
-        - Access a variable
-      - `OBJS`
-        - The name of the variable we defined earlier
-  - `gcc`
-    - Everything after the first line of a recipe is a just shell command. You can even tell Make that you want to use the Python shell. `gcc` is our compiler and linker.
-  - `$^`
-    - Using a variable built into the recipe, this one meaning "all of the dependnacies"
-  - `-o`
-    - Where and what should gcc output.
-  - `$@`
-    - Another variable built into recipes, this one meaning "the target"
-- And finally another recipe
-  - `%.o`
-    - The recipe target, pattern matching anything that ends in ".o"
-  - `: %.c`
-    - The dependancy for the recipe, picking the matching ".c" file
-  - `gcc`
-    - Invoking the compiler
-  - `-c`
-    - The flag telling GCC: "Only compile and assemble these inputs into objects, not executables" (see `gcc --help`)
-  - `$<`
-    - Built in variable meaning "the first depenancy"
-  - `-o`
-    - Flag telling the compiler to output the following output
-  - `$@`
-    - Builtin variable referencing the target of the recipe
+- First a variable assignment: `OBJS=main.o other_stuff.o`
+  - `OBJS`: a variable name
+  - `=`: an assignment (There are a bunch of types of assignment and Make is weird)
+  - `main.o other_stuff.o`: the names of the two object files that will be intermediate file that we build. More on these in the compilers section.
+- Next a recipe: `main: $(OBJS)`
+  - `main`: The target of the recipe, the name of our desired executable
+  - `: $(OBJS)`: Everything after the ":" on the first line of a recipe is a "dependancy", generally the list of files that the target depends on.
+    - `$( )`: Access a variable
+    - `OBJS`:  The name of the variable we defined earlier
+  - A shell command the recipe wants to execute: `gcc $^ -o $@`
+    - `gcc`:  Calling our compiler and linker.
+    - `$^`: Using a variable built into the recipe, this one meaning "all of the dependancies"
+    - `-o`: Where and what should gcc output.
+    - `$@`: Another variable built into recipes, this one meaning "the target"
+- And finally another recipe: `%.o: %.c`
+  - `%.o`: The recipe target, pattern matching anything that ends in ".o"
+  - `: %.c`: The dependancy for the recipe, picking the matching ".c" file
+  - Executing the command: `gcc -c $< -o $@`
+    - `gcc`: Invoking the compiler
+    - `-c`: The flag telling GCC: "Only compile and assemble these inputs into objects, not executables" (see `gcc --help`)
+    - `$<`: Built in variable meaning "the first depenancy"
+    - `-o`: Flag telling the compiler to output the following output
+    - `$@`: Builtin variable referencing the target of the recipe
 
 So what actually gets run? If we just run `make` without specificying a recipe to target, the first one in the Makefile will be run. In this case, the default recipe is `main`. But that recipe depends on two other files, `main.o` and `other_stuff.o`, which can both be made with the other recipe. Make will do it all for us:
 
@@ -156,7 +140,7 @@ So what actually gets run? If we just run `make` without specificying a recipe t
     gcc -c other_stuff.c -o other_stuff.o
     gcc main.o other_stuff.o -o main
 
-Why we wanted to do this will hopefully become more evident in the next section on the compiler itself. Suffice it to say, Make gives us a bunch more programability surrounding the compiler.
+Why we wanted to do this will hopefully become more evident in the next section on the compiler itself. Essentially, Make gives us a bunch more programability surrounding the compiler.
 
 ## Compilers
 
@@ -169,11 +153,49 @@ Compilers take in source code and output executables. Boom, we're done here. jk.
 3. Assemble the "stuff" into assembly "machine" code
 4. Link all the pieces of machine code into an executable
 
-__WORK IN PROGRESS__
+### 1. Reading in source code
+
+This is the part where the compiler screams at you for missing a semicolon (I hope your IDE caught that first). Exactly what things is complains about will depend on the C standard it is using (Remember those ISO nerds?). You can specify the standard with the flag: `-std=...`. Your professor might make you use something ancient like `-std=c89`. `-std=gnu11` is pretty dank. There are a few other flags for this such as `-ansi`, which is ancient scripture.
+
+I would highly recommend using additional warning flags. It might seem counter intutive to purposefully ask the compiler to give you more errors, but it can really help point out when you've screwed up. Here's my personal stash (straight from a `Makefile`), you should look up what they do:
+
+`WARNINGS=-pedantic -Wall -Wextra -Wmissing-prototypes -Wstrict-prototypes -Winit-self -Wuninitialized -Wmissing-declarations -Werror=format-security`
+
+### 2. Tranforms and Optimizations
+
+The compiler does all kinds of fancy things to make the trash code that you gave it better. You can specify how hard you want it to try with optimization flags (in order of increase try-hard):
+
+- `-O0`: Try zero, no optimizations
+- `-Os`: Try for size, optimize the code to be as small as possible
+- `-O1`: level 1, some optimizations, nothing crazy
+- `-Og`: debug optimizations, you want some optimizations, but you need the compiler to not screw up the embedded debug info that is put in the output for the `-g` flag. Explained further in [Module 5](../mod5/README.md)
+- `-O2`: level 2, most optimizations, potentially crazy optimizations
+- `-O3`: level 3: sweaty try-hard, all optimizations, quite possibly crazy
+
+For introductory programs, these don't matter at all. You'll want them later for the SPEED. Or if you've written such bad code that the compiler only notices your screw up in super try-hard `-O3` mode.
+
+### 3. Assembling
+
+Remember all the assembly code you wrote in 233 or 225? Well, computers do that for us now and they do it faster than you could and they screw up less. It looks like you're out of a job as an assembly programmer (probably not, humans still do that sometimes).
+
+Sometimes the assembly output is a `.s` file, otherwise its a `.o` object.
+
+### 4. Linking (Its actually called that)
+
+This is what we did in one of the makefiles. We specified some `.o`'s and asked for an executable binary. The executable is almost certainly of the format ELF, starting with a small header of meta data and configuration and stuff.
+
+### Tidbtis and takeways
+
+- You can switch between multiple compilers get better warning coverage (sometimes one compiler will catch something the other didn't)
+- You can switch between multiple optimization flags to get better warning coverage (the reason for this is that many optimizations rely on ignoring "Undefined behavior" aka your bug)
+- If you want to feel like a real badass you can clone the source code of the Tiny C Compiler (tcc) and compile the compiler yourself. Its pretty easy if you can find and follow the instructions.
+- Learn more in CSC 430!
 
 ## Excutables
 
 File extensions, such as `file.whatever`, `meme.png`, or `malware.exe`, are kind of made up bullshit (Thanks Bill). "Real" files tell you what they are by a header, the first few bytes of data inside the file. In the case of the executable files we build for 357, the file type is what is known as ELF (Executable and Linkable Format). The file extension is unecessary. Sometimes you will see a .elf file in contexts where more fancy linking is happening such as for an embedded target.
+
+<!-- Needed here: chmod +x -->
 
 ## handin
 
@@ -187,7 +209,10 @@ handin is a stupid simple program that runs on the unix servers. It is probably 
   4. That file could prevent your final submission from building or running correctly (Boom you have a zero for that assignemnt).
   5. You would have to ask the professor/grader to delete the file on their end.
 
+## Pop Quiz
+
+Go look at your browser history. Did you do more research on all of these topics? If so, you passed the pop quiz. You've just won an inflated ego, well done!
+
 ## Conclusion
 
-Phew, that was a lot of stuff before we even get to write any code... maybe next time in [module 2](../mod2/README.md)
-
+Phew, that was a lot of stuff before we even get to write any C... maybe next time in [module 2](../mod2/README.md)
