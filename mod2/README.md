@@ -30,11 +30,11 @@ Let's run it all!
     Hello, World!
     $
 
-Hopefully nothing surprising here. If it worked on the first try, you've won a pony. I lied. Theres no pony, just more code. 
-
-<!-- TODO: Add explanation -->
+Hopefully nothing surprising here. If it worked on the first try, you've won a pony. I lied. Theres no pony, just more code. The `#define` will be covered in module 3. For now, we are just using it to "import" `printf()`. The only other thing that might be wierd is the data type of `argv`. In Python, `sys.argv` is a `list` of `str`s. `argv` in C serves the same purpose. In this case, it is an array of character pointers, essentially a list of strings. I wonder where Python got the idea. Anyway, sometimes it might be possible to treat `argv` as a `char**`, depending on the C standard in use. You can also think about it as a `char[][]`. Strings and pointers will be covered in modules 3 and 5 respectively.
 
 ## Do it again, but over-engineered
+
+Let's now expand that example out to cover a bunch more C topics. There's a lot more going on in this second program.
 
 `main.c`
 
@@ -45,16 +45,20 @@ Hopefully nothing surprising here. If it worked on the first try, you've won a p
         return 0;
     }
 
+Instead of the standard IO library, I am including my header and calling the `hello()` function from it.
+
 `hello.h`
 
     #ifndef __HELLO_H__
     #define __HELLO_H__
 
-    #define HELLO_WORLD_STR ""
-
     void hello(void);
 
     #endif
+
+This one looks a bit funkier. `#ifndef`, `#define`, and `#endif` are preprocessor directives. The Preprocessor will be covered in module 3. The specific use of preprocessor direcives are a guard pattern that prevents multiple instances of `hello.h` from being compiled at once.
+
+The function signature, declares the existance of the `hello()` function. The body of the function is not here. It's like taking a selfie.
 
 `hello.c`
 
@@ -66,6 +70,8 @@ Hopefully nothing surprising here. If it worked on the first try, you've won a p
     void hello(void) {
         printf("%s", hello_world_str);
     }
+
+Now we get to define the body of `hello()`. We need `stdio.h`, as well as `hello.h`. Our string is `static` so it is only in this "translation unit" (file during compilation). Don't worry about that for now. We are now formatting the string when we print it. Guess where Python got its string formatting specifiers.
 
 `Makefile`
 
@@ -82,7 +88,9 @@ Hopefully nothing surprising here. If it worked on the first try, you've won a p
     %.o: %.c $(HDRS)
         gcc -c $< -o $@
 
-I swear I ran this an it worked.
+The `Makefile` is only a slight upgrade from module 1. The main change is that if our header changes, our other files that rely on it will be recompiled.
+
+I swear I ran this and it worked.
 
     $ make
     gcc -c main.c -o main.o
@@ -91,6 +99,6 @@ I swear I ran this an it worked.
     ./main
     Hello, World!
 
-There's a lot more going on in this second program so lets read it line by line (This is absolutely a legitamate strategy for finding bugs, you'd be surprised).
+Boom. With this framework you can grow your C programs to be a bit larger without too much trouble.
 
-<!-- TODO: Add explanation -->
+In the [next module](../mod3/README.md) we'll discuess the preprocessor in more detail.
