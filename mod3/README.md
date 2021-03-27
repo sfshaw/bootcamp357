@@ -115,4 +115,6 @@ In this situation, we only want one diffinition of everything from c.h inside a.
 
 The good news is there is not pop quiz for this module. The bad news is there is homework. Your assignment is to replicate the above situation with actual files and implement the preprocessor guard pattern to produce preprocessed compiler output (using `gcc -E` as explained above) where the contents of c.h only end up in a.c once.
 
-Try to get this to work on the unix servers. I'll see you in [module 4](../mod4/README.md).
+Try to get this to work on the unix servers. I'll see you in [module 4](../intermission/README.md).
+
+JK, you need a break. The intermission is next.
