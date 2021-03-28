@@ -19,9 +19,9 @@ My goal is to dump everything I still use, practice, and remember a few years af
 2. [Hello, World!](./mod2/README.md)
 3. [The preprocessor](./mod3/README.md)
 
-[Intermission Module](./intermission/README.md)
+[Intermission](./intermission/README.md)
 
-4. \[TODO] [The Memory Model](./mod4/README.md)
+4. [The Memory Model](./mod4/README.md)
 5. \[TODO] [Firearm safety (Pointers, GDB, Valgrind, and Godbolt)](./mod5/README.md)
 
 ## Methodology
