@@ -22,7 +22,7 @@ My goal is to dump everything I still use, practice, and remember a few years af
 [Intermission](./intermission/README.md)
 
 4. [The Memory Model](./mod4/README.md)
-5. \[TODO] [Firearm safety (Pointers, GDB, Valgrind, and Godbolt)](./mod5/README.md)
+5. \[In Progress] [Firearm safety (Pointers, GDB, Valgrind, and Godbolt)](./mod5/README.md)
 
 ## Methodology
 
