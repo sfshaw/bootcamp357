@@ -1,10 +1,10 @@
 # Module 1: Environment Setup (Make, compilers, and executables)
 
-In this frist module we will cover setting up the development environment.
+In this first module we will cover setting up the development environment.
 
-## Evironment
+## Environment
 
-The main focus of CPE 357 is programming in the Unix environment. Unix is the ancient spiritual predecessor to Linux. Today, we call Linux and BSD-like (of which MacOS can be considered) operating systems "Unix-like". Some of the likeness is due to shared deisgn choices and the rest is "POSIX" compliance. POSIX is an old operating system standard that many OS's follow to varying degrees. When looking at manual pages, you might see a section like:
+The main focus of CPE 357 is programming in the Unix environment. Unix is the ancient spiritual predecessor to Linux. Today, we call Linux and BSD-like (of which MacOS can be considered) operating systems "Unix-like". Some of the likeness is due to shared design choices and the rest is "POSIX" compliance. POSIX is an old operating system standard that many OS's follow to varying degrees. When looking at manual pages, you might see a section like:
 
     CONFORMING TO
        POSIX.1-2001, POSIX.1-2008, C89, C99.
@@ -14,7 +14,7 @@ Further reading: [Google "POSIX"](https://www.google.com/search?q=POSIX)
 
 ### OS
 
-Since CPE 357 is all about Unix, you should do all of your work on a Unix-like operating system. More specifically, all of your work will be graded on the CS deparment's Unix servers. Even if you do all your development in your own Ubuntu or MacOS environment, your program might fall on its face when run on the Unix servers. The Unix servers are probably also using an out of date compiler compared to your local machine. I do think there is value in developing local and then testing your code on the servers. Your local machine might perform more consistently that the servers that are simultaneously being used by hundreds of students. Connectiveity issues are also a problem. The latency, even in `ssh` and `vim`, can be infurriating. We'll discuss choices of IDE's in a following section. Suffice it to say, you must always ensure your program runs on the Unix servers where it will be graded.
+Since CPE 357 is all about Unix, you should do all of your work on a Unix-like operating system. More specifically, all of your work will be graded on the CS department's Unix servers. Even if you do all your development in your own Ubuntu or MacOS environment, your program might fall on its face when run on the Unix servers. The Unix servers are probably also using an out of date compiler compared to your local machine. I do think there is value in developing local and then testing your code on the servers. Your local machine might perform more consistently that the servers that are simultaneously being used by hundreds of students. Connectivity issues are also a problem. The latency, even in `ssh` and `vim`, can be infuriating. We'll discuss choices of IDEs in a following section. Suffice it to say, you must always ensure your program runs on the Unix servers where it will be graded.
 
 ### Terminal
 
@@ -40,25 +40,25 @@ To open a file in Vim:
     $ vim my_file.c
     ...
 
-Vim will open in "a mode that is not insert mode", meaning we can move around a bit but it is really expecting "commands" in its prompt. Pressing "i" will put it into "insert-mode" so we can actually move around with the arrow keys and type to insert characters. To get out of insert-mode, hit the escape key. Now you should be back in "probably command mode". To __quit Vim__, type a colon followed by q for quit. Vim might warn you that you will lose your changes. To save your files, use the ":w" command. Save and quit can be chained together as ":wq". If you don't want to save your changes, you can add an exclaimation mark to q to force it, ":q!" I hope you can tell that I don't use Vim often. Knowing how to escape Vim is really just a foundational skill. This has been a terrible explanation of Vim; you should now go look up some Vim tutorials.
+Vim will open in "a mode that is not insert mode", meaning we can move around a bit but it is really expecting "commands" in its prompt. Pressing "i" will put it into "insert-mode" so we can actually move around with the arrow keys and type to insert characters. To get out of insert-mode, hit the escape key. Now you should be back in "probably command mode". To __quit Vim__, type a colon followed by q for quit. Vim might warn you that you will lose your changes. To save your files, use the ":w" command. Save and quit can be chained together as ":wq". If you don't want to save your changes, you can add an exclamation mark to q to force it, ":q!" I hope you can tell that I don't use Vim often. Knowing how to escape Vim is really just a foundational skill. This has been a terrible explanation of Vim; you should now go look up some Vim tutorials.
 
 If you otherwise prefer a GUI IDE (because you weren't born in the 80's), these specific tasks are mostly just useful in a pinch. I love using VSCode but I can still use Vim to edit files inside a terminal. Vim can be configured in all kinds of ways with lots of settings and plugins.
 
 #### Microsoft's Visual Studio Code
 
-It's what's hot right now. Its not clunky like Visual Studio or IntelliJ. It is an electron based application, so it is literally another instance of Chrome running (Electron simultaneous exemplifies everything wrong with web technologies and peak performance of web technologies). It's portability is great. VSCode has plugins for everything under the sun. [Microsofts's C/C++ extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) is super good enough. In addition to that, you will need the [Remote - WSL extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl) in order to develope in Linux while on Windows (If you are afflicted by such malware).
+It's what's hot right now. Its not clunky like Visual Studio or IntelliJ. It is an electron based application, so it is literally another instance of Chrome running (Electron simultaneous exemplifies everything wrong with web technologies and peak performance of web technologies). It's portability is great. VSCode has plugins for everything under the sun. [Microsoft's C/C++ extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.cpptools) is super good enough. In addition to that, you will need the [Remote - WSL extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl) in order to develop in Linux while on Windows (If you are afflicted by such malware).
 
 I would recommend setting VSCode to autosave files very quickly, such as after 500 ms or on loss/change of focus.
 
 ### Git
 
-_Git_ is a "version control system" (VCS) used throughtout the software industry for tracking changes to code by teams of software engineers. Git was originally developed by Linus Torvalds, the creator of the Linux kernel. Git allows people in separate locations to make independant changes to code and then merge them into one version. It effectively achieves the collaboration of Google Docs (but not in real time) for source code. It has innumerable other features that make it indispensable to software engineers. _Github_ is a company that provides instances of Git as a free and commercial service. It is very common to use Github at Cal Poly as many premium features are provided to teachers and students for free. Other companies provide services similar to Github, including _Gitlab_ and _Atlassian's Bitbucket_. The interfaces provided by each company are different but under the hood, each is still Git or at least an API compatible with Git.
+_Git_ is a "version control system" (VCS) used throughout the software industry for tracking changes to code by teams of software engineers. Git was originally developed by Linus Torvalds, the creator of the Linux kernel. Git allows people in separate locations to make independent changes to code and then merge them into one version. It effectively achieves the collaboration of Google Docs (but not in real time) for source code. It has innumerable other features that make it indispensable to software engineers. _GitHub_ is a company that provides instances of Git as a free and commercial service. It is very common to use GitHub at Cal Poly as many premium features are provided to teachers and students for free. Other companies provide services similar to GitHub, including _GitLab_ and _Atlassian's Bitbucket_. The interfaces provided by each company are different but under the hood, each is still Git or at least an API compatible with Git.
 
 Learning to use Git effectively is one of the most important skills you can take away from your education Cal Poly. Becoming comfortable in Git will be invaluable to you at Cal Poly and beyond. You will likely be using it on day one at any software engineering job or internship.
 
 Git was originally developed to be used entirely from the command line. This is the canonical interface. It is extremely daunting at first and probably doesn’t make sense if you aren’t already comfortable with the terminal. The reality of the terminal is that the only reason it is hard for beginners is because it forces you to formally learn to use it through the command line. This differs from a graphical user interface (GUI) where many of us have developed an intuition to poke around and quickly discover features.
 
-You should endevour to use Git for everything that you code. In our simple use case here, GitHub will mostly just be acting as a backup of our code. Just like professors will encourage you to use Vim, they might encourage you to use the command line interface of Git. This can be great for you but I don't think its strictly neccessary for the desired learning outcomes. For this boot camp you should make use of Git either through the terminal or through a GUI client such as GitHub Desktop, VSCode, IntelliJ/CLion, etc..
+You should endeavor to use Git for everything that you code. In our simple use case here, GitHub will mostly just be acting as a backup of our code. Just like professors will encourage you to use Vim, they might encourage you to use the command line interface of Git. This can be great for you but I don't think its strictly necessary for the desired learning outcomes. For this boot camp you should make use of Git either through the terminal or through a GUI client such as GitHub Desktop, VSCode, IntelliJ/CLion, etc..
 
 This document is already inside Git _repository_ that I initialized with the command below. Git uses a directory, `.git` to store information about a repository.
 
@@ -71,7 +71,7 @@ I keep all of my repositories in the git directory, this one is a directory call
 
 ## Make and Makefiles
 
-Make is an awesome tool for scripting. It is basically the solution to repeatedly pressing the up arrow to find a command you need to run again. Just put a shell command under a "recipe" inside your `Makefile`. (Note that the following examples use spaces instead of tabs. I'm doing this for this document. Usually Make will shit itself if you give it spaces. Theres probably a workaround out there.)
+Make is an awesome tool for scripting. It is basically the solution to repeatedly pressing the up arrow to find a command you need to run again. Just put a shell command under a "recipe" inside your `Makefile`. (Note that the following examples use spaces instead of tabs. I'm doing this for this document. Usually Make will shit itself if you give it spaces. There's probably a workaround out there.)
 
     faster:
         omg --this shell_command.is | so -long
@@ -99,8 +99,8 @@ The `.PHONY: faster` tells make that the target, `faster` is not a file that it 
 
 Make expects recipe targets to be files and if it sees that a file is already "up-to-date", it does not run the recipe. Let's 'make' use of this. >:) I now present, a useful Makefile.
 
-    OBJS=main.o other_stuff.o 
-    
+    OBJS=main.o other_stuff.o
+
     main: $(OBJS)
         gcc $^ -o $@
 
@@ -108,7 +108,7 @@ Make expects recipe targets to be files and if it sees that a file is already "u
         gcc -c $< -o $@
 
 You: "woah woah woah wtf is all this. I don't want to learn another programming language."
-Just be glad I'm not teaching you CMake. \*gags\* Everything here is simple enough that I can explain it whithout full understanding it. Lets go one piece at a time:
+Just be glad I'm not teaching you CMake. \*gags\* Everything here is simple enough that I can explain it without full understanding it. Lets go one piece at a time:
 
 - First a variable assignment: `OBJS=main.o other_stuff.o`
   - `OBJS`: a variable name
@@ -116,38 +116,38 @@ Just be glad I'm not teaching you CMake. \*gags\* Everything here is simple enou
   - `main.o other_stuff.o`: the names of the two object files that will be intermediate file that we build. More on these in the compilers section.
 - Next a recipe: `main: $(OBJS)`
   - `main`: The target of the recipe, the name of our desired executable
-  - `: $(OBJS)`: Everything after the ":" on the first line of a recipe is a "dependancy", generally the list of files that the target depends on.
+  - `: $(OBJS)`: Everything after the ":" on the first line of a recipe is a "dependency", generally the list of files that the target depends on.
     - `$( )`: Access a variable
     - `OBJS`:  The name of the variable we defined earlier
   - A shell command the recipe wants to execute: `gcc $^ -o $@`
     - `gcc`:  Calling our compiler and linker.
-    - `$^`: Using a variable built into the recipe, this one meaning "all of the dependancies"
+    - `$^`: Using a variable built into the recipe, this one meaning "all of the dependencies"
     - `-o`: Where and what should gcc output.
     - `$@`: Another variable built into recipes, this one meaning "the target"
 - And finally another recipe: `%.o: %.c`
   - `%.o`: The recipe target, pattern matching anything that ends in ".o"
-  - `: %.c`: The dependancy for the recipe, picking the matching ".c" file
+  - `: %.c`: The dependency for the recipe, picking the matching ".c" file
   - Executing the command: `gcc -c $< -o $@`
     - `gcc`: Invoking the compiler
     - `-c`: The flag telling GCC: "Only compile and assemble these inputs into objects, not executables" (see `gcc --help`)
-    - `$<`: Built in variable meaning "the first depenancy"
+    - `$<`: Built in variable meaning "the first dependency"
     - `-o`: Flag telling the compiler to output the following output
     - `$@`: Builtin variable referencing the target of the recipe
 
-So what actually gets run? If we just run `make` without specificying a recipe to target, the first one in the Makefile will be run. In this case, the default recipe is `main`. But that recipe depends on two other files, `main.o` and `other_stuff.o`, which can both be made with the other recipe. Make will do it all for us:
+So what actually gets run? If we just run `make` without specifying a recipe to target, the first one in the Makefile will be run. In this case, the default recipe is `main`. But that recipe depends on two other files, `main.o` and `other_stuff.o`, which can both be made with the other recipe. Make will do it all for us:
 
     $ make
     gcc -c main.c -o main.o
     gcc -c other_stuff.c -o other_stuff.o
     gcc main.o other_stuff.o -o main
 
-Why we wanted to do this will hopefully become more evident in the next section on the compiler itself. Essentially, Make gives us a bunch more programability surrounding the compiler.
+Why we wanted to do this will hopefully become more evident in the next section on the compiler itself. Essentially, Make gives us a bunch more automation surrounding the compiler.
 
 ## Compilers
 
 The last section of Makefiles talked actually working with the compiler. This section will expand on that and be a bit more general. let the hand waving commence:
 
-Compilers take in source code and output executables. Boom, we're done here. jk. Our weapons of choice are the GNU Compoiler Collection (GCC) and CLang (A C frontend for the LLVM compiler framework). They both break the problem of translating source code to an executable into much smaller pieces of work. Roughly:
+Compilers take in source code and output executables. Boom, we're done here. jk. Our weapons of choice are the GNU Compiler Collection (GCC) and CLang (A C frontend for the LLVM compiler framework). They both break the problem of translating source code to an executable into much smaller pieces of work. Roughly:
 
 1. Translate the code into something that is easier for the compiler to work with (maybe an "AST" or intermediate representation)
 2. Do some transforms and optimizations of the code to make it less shitty. (I want to talk about compiler and optimization flags at least two more times)
@@ -158,11 +158,11 @@ Compilers take in source code and output executables. Boom, we're done here. jk.
 
 This is the part where the compiler screams at you for missing a semicolon (I hope your IDE caught that first). Exactly what things is complains about will depend on the C standard it is using (Remember those ISO nerds?). You can specify the standard with the flag: `-std=...`. Your professor might make you use something ancient like `-std=c89`. `-std=gnu11` is pretty dank. There are a few other flags for this such as `-ansi`, which is ancient scripture.
 
-I would highly recommend using additional warning flags. It might seem counter intutive to purposefully ask the compiler to give you more errors, but it can really help point out when you've screwed up. Here's my personal stash (straight from a `Makefile`), you should look up what they do:
+I would highly recommend using additional warning flags. It might seem counter intuitive to purposefully ask the compiler to give you more errors, but it can really help point out when you've screwed up. Here's my personal stash (straight from a `Makefile`), you should look up what they do:
 
 `WARNINGS=-pedantic -Wall -Wextra -Wmissing-prototypes -Wstrict-prototypes -Winit-self -Wuninitialized -Wmissing-declarations -Werror=format-security`
 
-### 2. Tranforms and Optimizations
+### 2. Transforms and Optimizations
 
 The compiler does all kinds of fancy things to make the trash code that you gave it better. You can specify how hard you want it to try with optimization flags (in order of increase try-hard):
 
@@ -183,31 +183,31 @@ Sometimes the assembly output is a `.s` file, otherwise its a `.o` object.
 
 ### 4. Linking (Its actually called that)
 
-This is what we did in one of the makefiles. We specified some `.o`'s and asked for an executable binary. The executable is almost certainly of the format ELF, starting with a small header of meta data and configuration and stuff.
+This is what we did in one of the Makefiles. We specified some `.o`'s and asked for an executable binary. The executable is almost certainly of the format ELF, starting with a small header of meta data and configuration and stuff.
 
-### Tidbtis and takeways
+### Tidbits and takeaways
 
 - You can switch between multiple compilers get better warning coverage (sometimes one compiler will catch something the other didn't)
 - You can switch between multiple optimization flags to get better warning coverage (the reason for this is that many optimizations rely on ignoring "Undefined behavior" aka your bug)
 - If you want to feel like a real badass you can clone the source code of the Tiny C Compiler (tcc) and compile the compiler yourself. Its pretty easy if you can find and follow the instructions.
 - Learn more in CSC 430!
 
-## Excutables
+## Executables
 
-File extensions, such as `file.whatever`, `meme.png`, or `malware.exe`, are kind of made up bullshit (Thanks Bill). "Real" files tell you what they are by a header, the first few bytes of data inside the file. In the case of the executable files we build for 357, the file type is what is known as ELF (Executable and Linkable Format). The file extension is unecessary. Sometimes you will see a .elf file in contexts where more fancy linking is happening such as for an embedded target.
+File extensions, such as `file.whatever`, `meme.png`, or `malware.exe`, are kind of made up bullshit (Thanks Bill). "Real" files tell you what they are by a header, the first few bytes of data inside the file. In the case of the executable files we build for 357, the file type is what is known as ELF (Executable and Linkable Format). The file extension is unnecessary. Sometimes you will see a .elf file in contexts where more fancy linking is happening such as for an embedded target.
 
 <!-- Needed here: chmod +x -->
 
 ## handin
 
-handin is a stupid simple program that runs on the unix servers. It is probably how you will submit files for class. I hate it very much and don't want to talk about it. I'm pretty sure I've already written multiple rants about it. Professors should have students submit code through Git instead. nuff said.
+handin is a stupid simple program that runs on the UNIX servers. It is probably how you will submit files for class. I hate it very much and don't want to talk about it. I'm pretty sure I've already written multiple rants about it. Professors should have students submit code through Git instead. 'nuff said.
 
-- handin is written and used in the unix utility style
+- handin is written and used in the UNIX utility style
 - You can't take anything back once it is submitted
   1. You submit a file to the professor/grader
   2. You delete that file in your directory
   3. That file still exists in the professor/grader's directory
-  4. That file could prevent your final submission from building or running correctly (Boom you have a zero for that assignemnt).
+  4. That file could prevent your final submission from building or running correctly (Boom you have a zero for that assignment).
   5. You would have to ask the professor/grader to delete the file on their end.
 
 ## Pop Quiz

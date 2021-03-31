@@ -1,12 +1,12 @@
 # CPE 357 Boot Camp
 
-Welcome, this is an asynchronous bootcamp targetted at Cal Poly CSC and CPE students entering CPE 357 in Spring 2021. The aim is to prepare students for intruction and labs in CPE 357. While CPE 357's pass rates are up and its mortality rates are down, students are still challenged by multiple simultaneous learning curves including the C langauge and Unix APIs.
+Welcome, this is an asynchronous boot camp targeted at Cal Poly CSC and CPE students entering CPE 357 in Spring 2021. The aim is to prepare students for instruction and labs in CPE 357. While CPE 357's pass rates are up and its mortality rates are down, students are still challenged by multiple simultaneous learning curves including the C language and Unix APIs.
 
 ## Learning objectives
 
 My goal is to dump everything I still use, practice, and remember a few years after taking the course. This includes gaining familiarity with the following:
 
-- Tools inclding Make and Git
+- Tools including Make and Git
 - The C Preprocessor
 - C compilers, and their flags and options
 - C language concepts including strings and pointers
@@ -30,13 +30,13 @@ My goal is to dump everything I still use, practice, and remember a few years af
 
 ### Schedule
 
-This "bootcamp" is designed to be completed in the week of Spring break leading up to the start of the spring quarter. One module can be completed per weekday.
+This "boot camp" is designed to be completed in the week of Spring break leading up to the start of the spring quarter. One module can be completed per weekday.
 
 ### Further Reading
 
-Learning how to search for relevant information is one of the most important skills that students should take away from CPE 357. Students are encouraged encouraged to do their own research using their perferred search engine. Links to Google searches are provided in place of references.
+Learning how to search for relevant information is one of the most important skills that students should take away from CPE 357. Students are encouraged encouraged to do their own research using their preferred search engine. Links to Google searches are provided in place of references.
 
-## How to succede in CPE 357
+## How to succeed in CPE 357
 
 - Prepare before taking 357:
   - Complete this or another introductory course
@@ -52,11 +52,11 @@ Learning how to search for relevant information is one of the most important ski
   - Collaborate:
     - It is absolutely necessary to work with others to understand the material.
     - The best way to learn is to teach.
-    - Obviously, plaigurism is stupid and hurts yourself. If your intention is avoid putting effort into your education, frankly, you should go back to eating dirt.
+    - Obviously, plagiarism is stupid and hurts yourself. If your intention is avoid putting effort into your education, frankly, you should go back to eating dirt.
     - You __MUST__ follow your professors' guidelines for working together or separately.
     - Communicating the concepts of the materials to others is vitally important for your own understanding. Arguably, teaching someone else a concept is the only way to prove you understand it.
 - Continue learning after 357:
-  - It took two more C classes after 357 for me to feel comfortable in the langauge.
+  - It took two more C classes after 357 for me to feel comfortable in the language.
   - 357 is a stepping stone to doing things with C. No one expects you to be awesome at something the first time.
 
 ## Disclaimer
@@ -87,7 +87,7 @@ Pull requests welcome!
 
 - I'd love to get more references and links to other resources throughout.
 - There is plenty of missing material
-- pls fix my mistakes
+- please fix my mistakes
 
 ### Contributors
 

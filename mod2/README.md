@@ -30,7 +30,7 @@ Let's run it all!
     Hello, World!
     $
 
-Hopefully nothing surprising here. If it worked on the first try, you've won a pony. I lied. Theres no pony, just more code. The `#define` will be covered in module 3. For now, we are just using it to "import" `printf()`. The only other thing that might be wierd is the data type of `argv`. In Python, `sys.argv` is a `list` of `str`s. `argv` in C serves the same purpose. In this case, it is an array of character pointers, essentially a list of strings. I wonder where Python got the idea. Anyway, sometimes it might be possible to treat `argv` as a `char**`, depending on the C standard in use. You can also think about it as a `char[][]`. Strings and pointers will be covered in modules 3 and 5 respectively.
+Hopefully nothing surprising here. If it worked on the first try, you've won a pony. I lied. There's no pony, just more code. The `#define` will be covered in module 3. For now, we are just using it to "import" `printf()`. The only other thing that might be weird is the data type of `argv`. In Python, `sys.argv` is a `list` of `str`s. `argv` in C serves the same purpose. In this case, it is an array of character pointers, essentially a list of strings. I wonder where Python got the idea. Anyway, sometimes it might be possible to treat `argv` as a `char**`, depending on the C standard in use. You can also think about it as a `char[][]`. Strings and pointers will be covered in modules 3 and 5 respectively.
 
 ## Do it again, but over-engineered
 
@@ -56,9 +56,9 @@ Instead of the standard IO library, I am including my header and calling the `he
 
     #endif
 
-This one looks a bit funkier. `#ifndef`, `#define`, and `#endif` are preprocessor directives. The Preprocessor will be covered in module 3. The specific use of preprocessor direcives are a guard pattern that prevents multiple instances of `hello.h` from being compiled at once.
+This one looks a bit funkier. `#ifndef`, `#define`, and `#endif` are preprocessor directives. The Preprocessor will be covered in module 3. The specific use of preprocessor directives are a guard pattern that prevents multiple instances of `hello.h` from being compiled at once.
 
-The function signature, declares the existance of the `hello()` function. The body of the function is not here. It's like taking a selfie.
+The function signature, declares the existence of the `hello()` function. The body of the function is not here. It's like taking a selfie.
 
 `hello.c`
 
@@ -101,4 +101,4 @@ I swear I ran this and it worked.
 
 Boom. With this framework you can grow your C programs to be a bit larger without too much trouble.
 
-In the [next module](../mod3/README.md) we'll discuess the preprocessor in more detail.
+In the [next module](../mod3/README.md) we'll discuses the preprocessor in more detail.
