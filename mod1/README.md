@@ -8,6 +8,7 @@ The main focus of CPE 357 is programming in the Unix environment. Unix is the an
 
     CONFORMING TO
        POSIX.1-2001, POSIX.1-2008, C89, C99.
+
 indicating that the thing you're looking at is compliant with some POSIX standards (as well as some C standards in this case)
 
 Further reading: [Google "POSIX"](https://www.google.com/search?q=POSIX)
@@ -21,6 +22,7 @@ Since CPE 357 is all about Unix, you should do all of your work on a Unix-like o
 The terminal is text based interface is used to interact with a computer. A program called a "shell" is used to make this easier. When using a terminal, it is generally assumed that someone is using a shell program such as `bash`(Very common), `ash`(let's pretend the A is for ancient), `zsh`(often the MacOS default), etc.. If I want to access another computer, such as a Unix server on campus, I can use a program called `ssh` to open a remote terminal/shell on that machine.
 
 <!-- TODO: Move this link to the main README.md because its a better version of this entire course -->
+
 MIT offers [a resource](https://missing.csail.mit.edu/) for learning all about this, courtesy of Rick.
 
 ### IDE
@@ -29,7 +31,7 @@ You've probably been using PyCharm and IntelliJ as your integrated development e
 
 #### Vim
 
-Vim is entirely useful to learn. At the bear minimum you should learn how to:
+Vim is entirely useful to learn. At the bare minimum you should learn how to:
 
 1. Open a file with Vim
 2. Edit a file in Vim
@@ -40,7 +42,9 @@ To open a file in Vim:
     $ vim my_file.c
     ...
 
-Vim will open in "a mode that is not insert mode", meaning we can move around a bit but it is really expecting "commands" in its prompt. Pressing "i" will put it into "insert-mode" so we can actually move around with the arrow keys and type to insert characters. To get out of insert-mode, hit the escape key. Now you should be back in "probably command mode". To __quit Vim__, type a colon followed by q for quit. Vim might warn you that you will lose your changes. To save your files, use the ":w" command. Save and quit can be chained together as ":wq". If you don't want to save your changes, you can add an exclamation mark to q to force it, ":q!" I hope you can tell that I don't use Vim often. Knowing how to escape Vim is really just a foundational skill. This has been a terrible explanation of Vim; you should now go look up some Vim tutorials.
+Vim will open in "a mode that is not insert mode", meaning we can move around a bit but it is really expecting "commands" in its prompt. Pressing "i" will put it into "insert-mode" so we can actually move around with the arrow keys and type to insert characters. To get out of insert-mode, hit the escape key. Now you should be back in "probably command mode". To **quit Vim**, type a colon followed by q for quit. Vim might warn you that you will lose your changes. To save your files, use the ":w" command. Save and quit can be chained together as ":wq". If you don't want to save your changes, you can add an exclamation mark to q to force it, ":q!" I hope you can tell that I don't use Vim often. Knowing how to escape Vim is really just a foundational skill. This has been a terrible explanation of Vim; you should now go look up some Vim tutorials.
+
+[Here is a cheat sheet on Vi(m) keybindings](https://vim.rtorr.com/)
 
 If you otherwise prefer a GUI IDE (because you weren't born in the 80's), these specific tasks are mostly just useful in a pinch. I love using VSCode but I can still use Vim to edit files inside a terminal. Vim can be configured in all kinds of ways with lots of settings and plugins.
 
@@ -67,11 +71,9 @@ To make a directory a Git repository:
     $ git init
     Initialized empty Git repository in /home/sfshaw/git/bootcamp357/.git/
 
-I keep all of my repositories in the git directory, this one is a directory called `bootcamp357`. At the end of each module, I'll show the steps I took to 'commit' to the repository.
-
 ## Make and Makefiles
 
-Make is an awesome tool for scripting. It is basically the solution to repeatedly pressing the up arrow to find a command you need to run again. Just put a shell command under a "recipe" inside your `Makefile`. (Note that the following examples use spaces instead of tabs. I'm doing this for this document. Usually Make will shit itself if you give it spaces. There's probably a workaround out there.)
+Make is an awesome tool for scripting. It is basically the solution to repeatedly pressing the up arrow to find a command you need to run again. Just put a shell command under a "recipe" inside your `Makefile`. (Note that the following examples use spaces instead of tabs. I'm doing this for this document. Make will shit itself if you give it spaces -- it was written to expect tabs.)
 
     faster:
         omg --this shell_command.is | so -long
@@ -118,9 +120,9 @@ Just be glad I'm not teaching you CMake. \*gags\* Everything here is simple enou
   - `main`: The target of the recipe, the name of our desired executable
   - `: $(OBJS)`: Everything after the ":" on the first line of a recipe is a "dependency", generally the list of files that the target depends on.
     - `$( )`: Access a variable
-    - `OBJS`:  The name of the variable we defined earlier
+    - `OBJS`: The name of the variable we defined earlier
   - A shell command the recipe wants to execute: `gcc $^ -o $@`
-    - `gcc`:  Calling our compiler and linker.
+    - `gcc`: Calling our compiler and linker.
     - `$^`: Using a variable built into the recipe, this one meaning "all of the dependencies"
     - `-o`: Where and what should gcc output.
     - `$@`: Another variable built into recipes, this one meaning "the target"
@@ -204,11 +206,19 @@ handin is a stupid simple program that runs on the UNIX servers. It is probably 
 
 - handin is written and used in the UNIX utility style
 - You can't take anything back once it is submitted
+
   1. You submit a file to the professor/grader
   2. You delete that file in your directory
   3. That file still exists in the professor/grader's directory
   4. That file could prevent your final submission from building or running correctly (Boom you have a zero for that assignment).
   5. You would have to ask the professor/grader to delete the file on their end.
+
+- That being said, you can "delete" the file by performing the following steps (in this example, suppose the file I want to delete is called `deleteMe.c`):
+
+  1. Delete the file in your working directory (`rm -iv deleteMe.c`)
+  2. Make a file of zero length (an empty file) using the command (`touch deleteMe.c`)
+  3. Hand in the zero-length file (`handin toUser asgnName deleteMe.c`)
+  4. Now, the file is as deleted as you can make it (it should no longer affect compilation)
 
 ## Pop Quiz
 
