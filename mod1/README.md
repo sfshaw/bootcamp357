@@ -20,6 +20,7 @@ Since CPE 357 is all about Unix, you should do all of your work on a Unix-like o
 
 The terminal is text based interface is used to interact with a computer. A program called a "shell" is used to make this easier. When using a terminal, it is generally assumed that someone is using a shell program such as `bash`(Very common), `ash`(let's pretend the A is for ancient), `zsh`(often the MacOS default), etc.. If I want to access another computer, such as a Unix server on campus, I can use a program called `ssh` to open a remote terminal/shell on that machine.
 
+<!-- TODO: Move this link to the main README.md because its a better version of this entire course -->
 MIT offers [a resource](https://missing.csail.mit.edu/) for learning all about this, courtesy of Rick.
 
 ### IDE

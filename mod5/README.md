@@ -18,7 +18,7 @@ is the same as:
 
     *(p + i)
 
-No one can actualy tell if `p` has `i` elements.
+No one can actualy tell if `p` has `i` elements. What is the 10th element of an array of length 5? It's "get pwned noob". :(
 
 ## GDB
 
@@ -54,6 +54,8 @@ Shell
 - `s` step
 - `print i` print out the value of i
 - `q` quit
+
+VSCode can also wrap GDB nicely for ease of use.
 
 ## Valgrind
 

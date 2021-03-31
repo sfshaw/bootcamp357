@@ -22,7 +22,9 @@ My goal is to dump everything I still use, practice, and remember a few years af
 [Intermission](./intermission/README.md)
 
 4. [The Memory Model](./mod4/README.md)
-5. \[In Progress] [Firearm safety (Pointers, GDB, Valgrind, and Godbolt)](./mod5/README.md)
+5. [Firearm safety (Pointers, GDB, Valgrind, and Godbolt)](./mod5/README.md)
+
+[Conclusion: It's dangerous to go alone! Take this.](./conclusion/README.md)
 
 ## Methodology
 
@@ -84,6 +86,7 @@ On to [module 1](./mod1/README.md)!
 Pull requests welcome!
 
 - I'd love to get more references and links to other resources throughout.
+- There is plenty of missing material
 - pls fix my mistakes
 
 ### Contributors
