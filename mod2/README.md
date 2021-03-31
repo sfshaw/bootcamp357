@@ -6,21 +6,25 @@ In this module we will get bogged down in BS while completing the classic introd
 
 `main.c`
 
-    #include <stdio.h>
+```c
+#include <stdio.h>
 
-    int main(int argc, char* argv[]) {
-        printf("Hello, World!\n");
-        return 0;
-    }
+int main(int argc, char* argv[]) {
+    printf("Hello, World!\n");
+    return 0;
+}
+```
 
 `Makefile`
 
-    .PHONY: run
-    run: main
-        ./main
+```makefile
+.PHONY: run
+run: main
+    ./main
 
-    main: main.c
-        gcc -o $@ $^
+main: main.c
+    gcc -o $@ $^
+```
 
 Let's run it all!
 
@@ -38,23 +42,27 @@ Let's now expand that example out to cover a bunch more C topics. There's a lot 
 
 `main.c`
 
-    #include "hello.h"
+```c
+#include "hello.h"
 
-    int main(int argc, char* argv[]) {
-        hello();
-        return 0;
-    }
+int main(int argc, char* argv[]) {
+    hello();
+    return 0;
+}
+```
 
 Instead of the standard IO library, I am including my header and calling the `hello()` function from it.
 
 `hello.h`
 
-    #ifndef __HELLO_H__
-    #define __HELLO_H__
+```c
+#ifndef __HELLO_H__
+#define __HELLO_H__
 
-    void hello(void);
+extern void hello(void);
 
-    #endif
+#endif /* __HELLO_H__ */
+```
 
 This one looks a bit funkier. `#ifndef`, `#define`, and `#endif` are preprocessor directives. The Preprocessor will be covered in module 3. The specific use of preprocessor directives are a guard pattern that prevents multiple instances of `hello.h` from being compiled at once.
 
@@ -62,31 +70,36 @@ The function signature, declares the existence of the `hello()` function. The bo
 
 `hello.c`
 
-    #include "hello.h"
-    #include <stdio.h>
+```c
+#include <stdio.h>
+/* system libraries should come before user libraries */
+#include "hello.h"
 
-    static char hello_world_str[] = "Hello, World!\n";
+static const char hello_world_str[] = "Hello, World!\n";
 
-    void hello(void) {
-        printf("%s", hello_world_str);
-    }
+void hello(void) {
+    printf("%s", hello_world_str);
+}
+```
 
-Now we get to define the body of `hello()`. We need `stdio.h`, as well as `hello.h`. Our string is `static` so it is only in this "translation unit" (file during compilation). Don't worry about that for now. We are now formatting the string when we print it. Guess where Python got its string formatting specifiers.
+Now we get to define the body of `hello()`. We need `stdio.h`, as well as `hello.h`. Our string is `const` since it is a string literal (i.e., a hard-coded string). Our string is also declared `static` so it is only in this "translation unit" (file during compilation). Don't worry about that for now. We are now formatting the string when we print it. Guess where Python got its string formatting specifiers.
 
 `Makefile`
 
-    HDRS=hello.h
-    OBJS=main.o hello.o
+```makefile
+HDRS=hello.h
+OBJS=main.o hello.o
 
-    .PHONY: run
-    run: main
-        ./main
+.PHONY: run
+run: main
+    ./main
 
-    main: $(OBJS)
-        gcc -o $@ $^
+main: $(OBJS)
+    gcc -o $@ $^
 
-    %.o: %.c $(HDRS)
-        gcc -c $< -o $@
+%.o: %.c $(HDRS)
+    gcc -c $< -o $@
+```
 
 The `Makefile` is only a slight upgrade from module 1. The main change is that if our header changes, our other files that rely on it will be recompiled.
 
