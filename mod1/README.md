@@ -71,6 +71,21 @@ To make a directory a Git repository:
     $ git init
     Initialized empty Git repository in /home/sfshaw/git/bootcamp357/.git/
 
+Since the commands never got added, here is a link to a presentation to get you started (or at least enough to be armed and dangerous):
+
+- Meta-link: [https://cplug.org/2020-getting-good-at-git/](https://cplug.org/2020-getting-good-at-git/)
+- Perma-links:
+
+  - Part 1 (Presentation): [https://youtu.be/H18s69KdGGg](https://youtu.be/H18s69KdGGg)
+  - Part 2 (Demo): [https://youtu.be/T4Xd3k1G5oU](https://youtu.be/T4Xd3k1G5oU)
+
+- Links referenced the video:
+
+  - [https://git-scm.com/book](https://git-scm.com/book)
+  - [https://try.github.io/](https://try.github.io/)
+  - [https://guides.github.com/](https://guides.github.com/)
+  - [https://git-school.github.io/visualizing-git/](https://git-school.github.io/visualizing-git/)
+
 ## Make and Makefiles
 
 Make is an awesome tool for scripting. It is basically the solution to repeatedly pressing the up arrow to find a command you need to run again. Just put a shell command under a "recipe" inside your `Makefile`. (Note that the following examples use spaces instead of tabs. I'm doing this for this document. Make will shit itself if you give it spaces -- it was written to expect tabs.)
