@@ -92,3 +92,4 @@ Pull requests welcome!
 ### Contributors
 
 - [Spencer Shaw](https://github.com/sfshaw-calpoly)
+- [Kedwin Chen](https://github.com/kedwinchen)
