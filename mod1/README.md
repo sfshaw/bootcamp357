@@ -71,6 +71,8 @@ To make a directory a Git repository:
     $ git init
     Initialized empty Git repository in /home/sfshaw/git/bootcamp357/.git/
 
+#### Links to Git Resources
+
 Since the commands never got added, here is a link to a presentation to get you started (or at least enough to be armed and dangerous):
 
 - Meta-link: [https://cplug.org/2020-getting-good-at-git/](https://cplug.org/2020-getting-good-at-git/)
@@ -85,6 +87,52 @@ Since the commands never got added, here is a link to a presentation to get you 
   - [https://try.github.io/](https://try.github.io/)
   - [https://guides.github.com/](https://guides.github.com/)
   - [https://git-school.github.io/visualizing-git/](https://git-school.github.io/visualizing-git/)
+
+#### Git Workflow Graph
+
+In general, your workflow will look something like this (if you don't need to do complex commit managing/rolling back work).
+There are definitely better graphs out there with more complex git flows, this is one is pretty simple.
+
+```
+    +----------------+                                                  +--------------------------------------+
+    | on branch main | ----- `git checkout -b new_project_branch` ----> | on branch new_project_branch (clean) |
+    +----------------+                                                  +--------------------------------------+
+                                                                            |                      /|\
+                            +--- `git checkout main` <--- (yes) ----- done with project?            |
+                            |                                               |                       |
+                            V                                               |                       |
+    +---------------------------------------------------+               (not yet)                   |
+    | on branch main                                    |                   |                       |
+    |   (does not have changes from new_project_branch) |                   |                       |
+    +---------------------------------------------------+              do some work                 |
+            |                                                         run some tests                |
+    `git merge [--no-ff] new_project_branch`                     get your code to a good state      |
+        (pulls in changes on new_project_branch)                            |                       |
+            |                                                               |                       |
+            V                                           +--------------------------------------+    |
+    +-----------------------------------------+         | on branch new_project_branch (dirty) |    |
+    | on branch main                          |         +--------------------------------------+    |
+    |   (has changes from new_project_branch) |                             |                       |
+    +-----------------------------------------+                 `git add <changed file(s)>`         |
+                                                                            |                       |
+                                                                            V                       |
+                                                                +-------------------------+         |
+                                                                | changes ready to commit |         |
+                                                                +-------------------------+         |
+                                                                            |                       |
+                                                            `git commit [-m "commit message"]`      |
+                                                                            |                       |
+                                                                            +-----------------------+
+```
+
+How to read the graph:
+
+- Each "box" contains a "state" (what status your git repository is in (view this with `git status`)
+- `dirty` refers to a state where there are "untracked changes" (i.e., you have made changes that Git has not yet written into its history)
+- `clean` refers to a state where there are no untracked changes
+- The `git` commands to move between states are in backticks (for example, `` `git help` ``)
+- Anything inside square brackets (`[ ]`) means it is an optional command line argument
+- Anything inside angled brackets (`< >`) means it is a **mandatory** command line argument
 
 ## Make and Makefiles
 
@@ -242,3 +290,7 @@ Go look at your browser history. Did you do more research on all of these topics
 ## Conclusion
 
 Phew, that was a lot of stuff before we even get to write any C... maybe next time in [module 2](../mod2/README.md)
+
+```
+
+```
