@@ -18,19 +18,21 @@ int HELLOOOO() {
 
 Gives us:
 
-    $ gcc main.c -E
-    # 1 "main.c"
-    # 1 "<built-in>"
-    # 1 "<command-line>"
-    # 31 "<command-line>"
-    # 1 "/usr/include/stdc-predef.h" 1 3 4
-    # 32 "<command-line>" 2
-    # 1 "main.c"
+```shell
+$ gcc main.c -E
+# 1 "main.c"
+# 1 "<built-in>"
+# 1 "<command-line>"
+# 31 "<command-line>"
+# 1 "/usr/include/stdc-predef.h" 1 3 4
+# 32 "<command-line>" 2
+# 1 "main.c"
 
 
-    int main() {
-        return 0;
-    }
+int main() {
+    return 0;
+}
+```
 
 IDK what all that info is at the start, but you can see that the preprocessor replaced `HELLOOOO` with `main`.
 
