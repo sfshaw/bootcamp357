@@ -129,6 +129,8 @@ In this situation, we only want one definition of everything from `c.h` inside `
 
 The good news is there is not pop quiz for this module. The bad news is there is homework. Your assignment is to replicate the above situation with actual files and implement the preprocessor guard pattern to produce preprocessed compiler output (using `gcc -E` as explained above) where the contents of `c.h` only end up in `a.c` once.
 
+The comment `/* __MY_HEADER_H__ */` after the `#endif` is added purely for readability (especially for more complex header files)
+
 Try to get this to work on the UNIX servers. I'll see you in [module 4](../intermission/README.md).
 
 JK, you need a break. The intermission is next.

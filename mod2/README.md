@@ -66,7 +66,7 @@ extern void hello(void);
 
 This one looks a bit funkier. `#ifndef`, `#define`, and `#endif` are preprocessor directives. The Preprocessor will be covered in module 3. The specific use of preprocessor directives are a guard pattern that prevents multiple instances of `hello.h` from being compiled at once.
 
-The function signature, declares the existence of the `hello()` function. The body of the function is not here. It's like taking a selfie.
+The function signature, declares the existence of the `hello()` function. The body of the function is not here (the `extern` keyword, while not strictly necessary, explicitly states this). It's like taking a selfie.
 
 `hello.c`
 
