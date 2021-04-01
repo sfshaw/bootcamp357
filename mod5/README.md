@@ -65,7 +65,7 @@ Shell
 
     > q
 
-- `b main`: (short for `break main`)s et a break point at the main function
+- `b main`: (short for `break main`) set a break point at the main function
 - `r` (short for `run`) run the program
 - `s` (short for `step`) step
 - `print i` print out the value of i
