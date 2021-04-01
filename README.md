@@ -91,4 +91,4 @@ Pull requests welcome!
 
 ### Contributors
 
-- Spencer Shaw
+- [Spencer Shaw](https://github.com/sfshaw-calpoly)
