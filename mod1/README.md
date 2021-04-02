@@ -6,8 +6,10 @@ In this first module we will cover setting up the development environment.
 
 The main focus of CPE 357 is programming in the Unix environment. Unix is the ancient spiritual predecessor to Linux. Today, we call Linux and BSD-like (of which MacOS can be considered) operating systems "Unix-like". Some of the likeness is due to shared design choices and the rest is "POSIX" compliance. POSIX is an old operating system standard that many OS's follow to varying degrees. When looking at manual pages, you might see a section like:
 
-    CONFORMING TO
-       POSIX.1-2001, POSIX.1-2008, C89, C99.
+```man
+CONFORMING TO
+    POSIX.1-2001, POSIX.1-2008, C89, C99.
+```
 
 indicating that the thing you're looking at is compliant with some POSIX standards (as well as some C standards in this case)
 
@@ -39,8 +41,10 @@ Vim is entirely useful to learn. At the bare minimum you should learn how to:
 
 To open a file in Vim:
 
+```shell
     $ vim my_file.c
     ...
+```
 
 Vim will open in "a mode that is not insert mode", meaning we can move around a bit but it is really expecting "commands" in its prompt. Pressing "i" will put it into "insert-mode" so we can actually move around with the arrow keys and type to insert characters. To get out of insert-mode, hit the escape key. Now you should be back in "probably command mode". To **quit Vim**, type a colon followed by q for quit. Vim might warn you that you will lose your changes. To save your files, use the ":w" command. Save and quit can be chained together as ":wq". If you don't want to save your changes, you can add an exclamation mark to q to force it, ":q!" I hope you can tell that I don't use Vim often. Knowing how to escape Vim is really just a foundational skill. This has been a terrible explanation of Vim; you should now go look up some Vim tutorials.
 
@@ -68,8 +72,10 @@ This document is already inside Git _repository_ that I initialized with the com
 
 To make a directory a Git repository:
 
+```shell
     $ git init
     Initialized empty Git repository in /home/sfshaw/git/bootcamp357/.git/
+```
 
 #### Links to Git Resources
 
@@ -93,7 +99,7 @@ Since the commands never got added, here is a link to a presentation to get you 
 In general, your workflow will look something like this (if you don't need to do complex commit managing/rolling back work).
 There are definitely better graphs out there with more complex git flows, this is one is pretty simple.
 
-```
+```graph
     +----------------+                                                  +--------------------------------------+
     | on branch main | ----- `git checkout -b new_project_branch` ----> | on branch new_project_branch (clean) |
     +----------------+                                                  +--------------------------------------+
@@ -138,6 +144,7 @@ How to read the graph:
 
 Make is an awesome tool for scripting. It is basically the solution to repeatedly pressing the up arrow to find a command you need to run again. Just put a shell command under a "recipe" inside your `Makefile`. (Note that the following examples use spaces instead of tabs. I'm doing this for this document. Make will shit itself if you give it spaces -- it was written to expect tabs.)
 
+```Makefile
     faster:
         omg --this shell_command.is | so -long
 
@@ -152,11 +159,14 @@ Or if you're lazy and bad at typing like me:
     f: faster
     faster:
         omg --this shell_command.is | so -long
+```
 
 I have `m` aliased to `make` in my shell (search for "bash aliases"), I just run:
 
+```shell
     $ m f
     omg --this shell_command.is | so -long
+```
 
 Save your arrow keys for... actually they aren't that useful.
 
@@ -164,6 +174,7 @@ The `.PHONY: faster` tells make that the target, `faster` is not a file that it 
 
 Make expects recipe targets to be files and if it sees that a file is already "up-to-date", it does not run the recipe. Let's 'make' use of this. >:) I now present, a useful Makefile.
 
+```Makefile
     OBJS=main.o other_stuff.o
 
     main: $(OBJS)
@@ -171,6 +182,7 @@ Make expects recipe targets to be files and if it sees that a file is already "u
 
     %.o: %.c
         gcc -c $< -o $@
+```
 
 You: "woah woah woah wtf is all this. I don't want to learn another programming language."
 Just be glad I'm not teaching you CMake. \*gags\* Everything here is simple enough that I can explain it without full understanding it. Lets go one piece at a time:
@@ -201,10 +213,12 @@ Just be glad I'm not teaching you CMake. \*gags\* Everything here is simple enou
 
 So what actually gets run? If we just run `make` without specifying a recipe to target, the first one in the Makefile will be run. In this case, the default recipe is `main`. But that recipe depends on two other files, `main.o` and `other_stuff.o`, which can both be made with the other recipe. Make will do it all for us:
 
+```shell
     $ make
     gcc -c main.c -o main.o
     gcc -c other_stuff.c -o other_stuff.o
     gcc main.o other_stuff.o -o main
+```
 
 Why we wanted to do this will hopefully become more evident in the next section on the compiler itself. Essentially, Make gives us a bunch more automation surrounding the compiler.
 
@@ -290,7 +304,3 @@ Go look at your browser history. Did you do more research on all of these topics
 ## Conclusion
 
 Phew, that was a lot of stuff before we even get to write any C... maybe next time in [module 2](../mod2/README.md)
-
-```
-
-```
