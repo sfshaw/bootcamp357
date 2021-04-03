@@ -17,7 +17,7 @@ Further reading: [Google "POSIX"](https://www.google.com/search?q=POSIX)
 
 ### OS
 
-Since CPE 357 is all about Unix, you should do all of your work on a Unix-like operating system. More specifically, all of your work will be graded on the CS department's Unix servers. Even if you do all your development in your own Ubuntu or MacOS environment, your program might fall on its face when run on the Unix servers. The Unix servers are probably also using an out of date compiler compared to your local machine. I do think there is value in developing local and then testing your code on the servers. Your local machine might perform more consistently that the servers that are simultaneously being used by hundreds of students. Connectivity issues are also a problem. The latency, even in `ssh` and `vim`, can be infuriating. We'll discuss choices of IDEs in a following section. Suffice it to say, you must always ensure your program runs on the Unix servers where it will be graded.
+Since CPE 357 is all about Unix, you should do all of your work on a Unix-like operating system. More specifically, all of your work will be graded on the CS department's Unix servers. Even if you do all your development in your own Ubuntu or MacOS environment, your program might fall on its face when run on the Unix servers (every computer is different!). The Unix servers are probably also using an out of date compiler compared to your local machine. I do think there is value in developing local and then testing your code on the servers. Your local machine might perform more consistently that the servers that are simultaneously being used by hundreds of students. Connectivity issues are also a problem. The latency, even in `ssh` and `vim`, can be infuriating. We'll discuss choices of IDEs in a following section. Suffice it to say, you must always ensure your program runs on the Unix servers where it will be graded.
 
 ### Terminal
 
@@ -50,7 +50,15 @@ Vim will open in "a mode that is not insert mode", meaning we can move around a 
 
 [Here is a cheat sheet on Vi(m) keybindings](https://vim.rtorr.com/)
 
-If you otherwise prefer a GUI IDE (because you weren't born in the 80's), these specific tasks are mostly just useful in a pinch. I love using VSCode but I can still use Vim to edit files inside a terminal. Vim can be configured in all kinds of ways with lots of settings and plugins.
+If you otherwise prefer a GUI IDE (because you weren't born in the 80's), these specific tasks are mostly just useful in a pinch. I love using VSCode but I can still use Vim to edit files inside a terminal. Vim can be configured in all kinds of ways with lots of settings and plugins. To change Vim settings, the vim settings file located at ~/.vimrc is where the settings are sourced from. If it does not exist already, just create it with Vim! Here are some of my favorite Vim settings:
+```
+set mouse=a " enables mouse usage
+set number " turns line numbers on
+set autoindent " autoindents
+set expandtab " expands tabs you put in into spaces
+set tabstop=4 " sets the character width of a tab character
+set shiftwidth=4 " sets the autoindent amounts
+```
 
 #### Microsoft's Visual Studio Code
 
@@ -161,7 +169,7 @@ Or if you're lazy and bad at typing like me:
         omg --this shell_command.is | so -long
 ```
 
-I have `m` aliased to `make` in my shell (search for "bash aliases"), I just run:
+I have `m` aliased to `make` in my shell (search for "[bash aliases](https://www.google.com/search?q=bash+aliases)"), I just run:
 
 ```shell
     $ m f
@@ -239,7 +247,7 @@ This is the part where the compiler screams at you for missing a semicolon (I ho
 
 I would highly recommend using additional warning flags. It might seem counter intuitive to purposefully ask the compiler to give you more errors, but it can really help point out when you've screwed up. Here's my personal stash (straight from a `Makefile`), you should look up what they do:
 
-`WARNINGS=-pedantic -Wall -Wextra -Wmissing-prototypes -Wstrict-prototypes -Winit-self -Wuninitialized -Wmissing-declarations -Werror=format-security`
+`WARNINGS=-pedantic -Wall -Wextra -Wmissing-prototypes -Wstrict-prototypes -Wmissing-declarations -Werror=format-security`
 
 ### 2. Transforms and Optimizations
 
@@ -258,7 +266,7 @@ For introductory programs, these don't matter at all. You'll want them later for
 
 Remember all the assembly code you wrote in 233 or 225? Well, computers do that for us now and they do it faster than you could and they screw up less. It looks like you're out of a job as an assembly programmer (probably not, humans still do that sometimes).
 
-Sometimes the assembly output is a `.s` file, otherwise its a `.o` object.
+Sometimes the assembly output is a `.s` file, otherwise its a `.o` object. If you'd like to see your assembly code, use the flag `-S` in your compilation step.
 
 ### 4. Linking (Its actually called that)
 
@@ -276,6 +284,7 @@ This is what we did in one of the Makefiles. We specified some `.o`'s and asked 
 File extensions, such as `file.whatever`, `meme.png`, or `malware.exe`, are kind of made up bullshit (Thanks Bill). "Real" files tell you what they are by a header, the first few bytes of data inside the file. In the case of the executable files we build for 357, the file type is what is known as ELF (Executable and Linkable Format). The file extension is unnecessary. Sometimes you will see a .elf file in contexts where more fancy linking is happening such as for an embedded target.
 
 <!-- Needed here: chmod +x -->
+Not all files have the same permissions in the Unix ecosystem, and thus we need to be able to differentiate between the different types. As you begin 357, you'll start writing scripts and other executable files. These require the use of the command `chmod +x <filename>` to be executed. GCC and Clang's output executables already set the output flags on those files, and thus can be executed right out of the compilation process.
 
 ## handin
 
