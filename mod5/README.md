@@ -68,6 +68,7 @@ Shell
 - `b main`: (short for `break main`) set a break point at the main function
 - `r` (short for `run`) run the program
 - `s` (short for `step`) step
+- `c` (short for `continue`) continue the program until the next breakpoint
 - `print i` print out the value of i
 - `q` quit
 
