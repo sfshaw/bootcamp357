@@ -1,6 +1,6 @@
 # Module 3: The Preprocessor
 
-Red alert: The compiler actually runs another sort-of compiler prior to compiling C source code. This "pre-compiler" is called the preprocessor. It is a very low level form of "meta-programming", programming something to write code. If you recall from module 2, we intermixed preprocessor directives write inside our `.h` and `.c` C files. Most of the preprocessor's operations are pretty much copy and pasting. Lets go over what we used there but in more detail.
+Red alert: The compiler actually runs another sort-of compiler prior to compiling C source code. This "pre-compiler" is called the preprocessor. It is a very low level form of "meta-programming", programming something to write code. If you recall from module 2, we intermixed preprocessor directives inside our `.h` and `.c` C files. Most of the preprocessor's operations are pretty much copy and pasting. Lets go over what we used there but in more detail.
 
 ## Observability
 
