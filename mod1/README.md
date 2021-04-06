@@ -33,7 +33,7 @@ You've probably been using PyCharm and IntelliJ as your integrated development e
 
 #### Vim
 
-Vim is entirely useful to learn. At the bare minimum you should learn how to:
+Vim is "Vi Improved". Vi is another older text editor. If someone is writing about both, they might write "Vi(m)". Vim is entirely useful to learn. At the bare minimum you should learn how to:
 
 1. Open a file with Vim
 2. Edit a file in Vim
@@ -51,7 +51,8 @@ Vim will open in "a mode that is not insert mode", meaning we can move around a 
 [Here is a cheat sheet on Vi(m) keybindings](https://vim.rtorr.com/)
 
 If you otherwise prefer a GUI IDE (because you weren't born in the 80's), these specific tasks are mostly just useful in a pinch. I love using VSCode but I can still use Vim to edit files inside a terminal. Vim can be configured in all kinds of ways with lots of settings and plugins. To change Vim settings, the vim settings file located at ~/.vimrc is where the settings are sourced from. If it does not exist already, just create it with Vim! Here are some of my favorite Vim settings:
-```
+
+```vim
 set mouse=a " enables mouse usage
 set number " turns line numbers on
 set autoindent " autoindents
