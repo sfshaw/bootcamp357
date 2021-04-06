@@ -36,7 +36,7 @@ Hello, World!
 $
 ```
 
-Hopefully nothing surprising here. If it worked on the first try, you've won a pony. I lied. There's no pony, just more code. The `#define` will be covered in module 3. For now, we are just using it to "import" `printf()`. The only other thing that might be weird is the data type of `argv`. In Python, `sys.argv` is a `list` of `str`s. `argv` in C serves the same purpose. In this case, it is an array of character pointers, essentially a list of strings. I wonder where Python got the idea. Anyway, sometimes it might be possible to treat `argv` as a `char**`, depending on the C standard in use. You can also think about it as a `char[][]`. Strings and pointers will be covered in modules 3 and 5 respectively.
+Hopefully nothing surprising here. If it worked on the first try, you've won a pony. I lied. There's no pony, just more code. The `#include` will be covered in module 3. For now, we are just using it to "import" `printf()`. The only other thing that might be weird is the data type of `argv`. In Python, `sys.argv` is a `list` of `str`s. `argv` in C serves the same purpose. In this case, it is an array of character pointers, essentially a list of strings. I wonder where Python got the idea. Anyway, sometimes it might be possible to treat `argv` as a `char**`, depending on the C standard in use. You can also think about it as a `char[][]`. Strings and pointers will be covered in modules 3 and 5 respectively.
 
 ## Do it again, but over-engineered
 
