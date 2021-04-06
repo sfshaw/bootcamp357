@@ -93,3 +93,4 @@ Pull requests welcome!
 
 - [Spencer Shaw](https://github.com/sfshaw-calpoly)
 - [Kedwin Chen](https://github.com/kedwinchen)
+- [Sebastien Danthinne](https://github.com/sdanthinne)
