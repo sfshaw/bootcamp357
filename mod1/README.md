@@ -284,8 +284,11 @@ This is what we did in one of the Makefiles. We specified some `.o`'s and asked 
 
 File extensions, such as `file.whatever`, `meme.png`, or `malware.exe`, are kind of made up bullshit (Thanks Bill). "Real" files tell you what they are by a header, the first few bytes of data inside the file. In the case of the executable files we build for 357, the file type is what is known as ELF (Executable and Linkable Format). The file extension is unnecessary. Sometimes you will see a .elf file in contexts where more fancy linking is happening such as for an embedded target.
 
-<!-- Needed here: chmod +x -->
-Not all files have the same permissions in the Unix ecosystem, and thus we need to be able to differentiate between the different types. As you begin 357, you'll start writing scripts and other executable files. These require the use of the command `chmod +x <filename>` to be executed. GCC and Clang's output executables already set the output flags on those files, and thus can be executed right out of the compilation process.
+## Permissions
+
+Files on UNIX systems have permissions. You should cover this in CPE 357. These permissions values are usually represented with three octal digits (0-7) denoting what someone can do with a file. Each digit corresponds to a user, a group, or anyone. Each bit of each digit indicate whether what that target user can do: Read, Write, and Execute. This is a great time to go and get yourself some citations (not dolphins). Search away.
+
+As you begin 357, you'll start writing scripts and other executable files. These may require the use of the command `chmod +x <filename>` to permit the file to be executed. GCC and Clang's output executables should already set the output flags for those files, and thus can be executed right out of the compilation process.
 
 ## handin
 
